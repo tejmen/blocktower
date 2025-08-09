@@ -1,0 +1,8 @@
+{
+	"required": true,
+	"package": "dev.alphacerium.blocktower.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "blocktower",
+	"version": "${mod_version}",
+	"name": "Blocktower",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"AlphaCerium"
+	],
+	"contact": {
+		"homepage": "https://alphacerium.dev/",
+		"sources": "https://github.com/appcreatorguy/blocktower"
+	},
+	"license": "MIT",
+	"icon": "assets/blocktower/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "dev.alphacerium.blocktower.Blocktower",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "dev.alphacerium.blocktower.BlocktowerClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"depends": {
+		"fabricloader": "${fabric_loader_dependency}",
+		"minecraft": "${minecraft_dependency}",
+		"java": ">=21",
+		"fabric-api": "${fabric_api_version}",
+		"fabric-language-kotlin": "${fabric_language_kotlin_dependency}",
+        "advancedgroups": "${advanced_groups_version}"
+	},
+    "breaks": {
+      "fabric-api": "${fabric_api_dependency_breaks}"
+    }
+}
