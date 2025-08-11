@@ -1,5 +1,7 @@
 package dev.alphacerium.blocktower.events
 
+import dev.alphacerium.advancedgroups.core.PushGroup
+import dev.alphacerium.advancedgroups.core.ReleaseGroup
 import dev.alphacerium.blocktower.Blocktower
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.server.level.ServerLevel
@@ -19,9 +21,15 @@ object PrivateRoomEvents {
             val pos = player.blockPosition()
             for (room in rooms) {
                 when (pos) {
-                    // TODO: connect to group push/release logic
-                    room.entrance -> Blocktower.LOGGER.info($$"Player ${player.gameProfile.name} is at entrance of private room ${room.name}")
-                    room.exit -> Blocktower.LOGGER.info($$"Player ${player.gameProfile.name} is at exit of private room ${room.name}")
+                    // TODO: fix this so it works like the datapack
+                    room.entrance -> {
+                        Blocktower.LOGGER.info("Player ${player.gameProfile.name} is at entrance of private room ${room.name}")
+                        PushGroup.pushGroup(player, room.group.id)
+                    }
+                    room.exit -> {
+                        Blocktower.LOGGER.info("Player ${player.gameProfile.name} is at exit of private room ${room.name}")
+                        ReleaseGroup.releaseGroup(player)
+                    }
                     else -> {}
                 }
             }

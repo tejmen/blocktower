@@ -31,6 +31,7 @@ dependencies {
 	// To change the versions see the gradle.properties file
     modImplementation("maven.modrinth:advanced-groups:fabric-${advanced_groups_version}")
     modImplementation("maven.modrinth:enhanced-groups:fabric-${enhanced_groups_version}")
+    implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
     modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_mod_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${fabric_kotlin_version}"
     include(modImplementation("maven.modrinth:admiral:${admiral_version}+fabric"))

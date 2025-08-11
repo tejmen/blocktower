@@ -26,7 +26,13 @@
 				"value": "dev.alphacerium.blocktower.BlocktowerClient",
 				"adapter": "kotlin"
 			}
-		]
+		],
+        "voicechat": [
+            {
+                "value": "dev.alphacerium.blocktower.BlocktowerVoicechatPlugin",
+                "adapter": "kotlin"
+            }
+        ]
 	},
 	"depends": {
 		"fabricloader": "${fabric_loader_dependency}",
