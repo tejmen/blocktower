@@ -9,13 +9,13 @@ class BlocktowerVoicechatPlugin : VoicechatPlugin {
     companion object {
         final lateinit var SERVER_API: VoicechatServerApi
     }
-    override fun getPluginId(): String? {
+    override fun getPluginId(): String {
         return Blocktower.MOD_ID
     }
 
     override fun registerEvents(registration: EventRegistration) {
-        registration.registerEvent<VoicechatServerStartedEvent>(VoicechatServerStartedEvent::class.java, { event ->
+        registration.registerEvent<VoicechatServerStartedEvent>(VoicechatServerStartedEvent::class.java) { event ->
             SERVER_API = event.voicechat
-        })
+        }
     }
 }

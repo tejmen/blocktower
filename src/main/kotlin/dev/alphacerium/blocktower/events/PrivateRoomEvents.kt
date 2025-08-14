@@ -21,7 +21,6 @@ object PrivateRoomEvents {
             val pos = player.blockPosition()
             for (room in rooms) {
                 when (pos) {
-                    // TODO: fix this so it works like the datapack
                     room.entrance -> {
                         Blocktower.LOGGER.info("Player ${player.gameProfile.name} is at entrance of private room ${room.name}")
                         PushGroup.pushGroup(player, room.group.id)

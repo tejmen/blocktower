@@ -3,7 +3,13 @@ package dev.alphacerium.blocktower.config
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import de.maxhenkel.enhancedgroups.EnhancedGroups
+import de.maxhenkel.enhancedgroups.command.PersistentGroupCommands
+import de.maxhenkel.enhancedgroups.command.PersistentGroupCommands.removePersistentGroup
+import de.maxhenkel.enhancedgroups.config.PersistentGroup
 import dev.alphacerium.blocktower.Blocktower
+import dev.alphacerium.blocktower.BlocktowerVoicechatPlugin
+import io.netty.util.Recycler
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
@@ -63,7 +69,24 @@ class PrivateRoomStore(private val file: File) {
     }
 
     fun removePrivateRoom(privateRoom: PrivateRoom) {
+        removePersistentGroup(privateRoom.group)
         rooms.remove(privateRoom)
         save()
+    }
+
+    fun removePersistentGroup(persistentGroup: PersistentGroup) {
+        val voicechatId = EnhancedGroups.PERSISTENT_GROUP_STORE.getVoicechatId(persistentGroup.id)
+        val group = BlocktowerVoicechatPlugin.SERVER_API.getGroup(voicechatId)
+        if (group == null) {
+            Blocktower.LOGGER.error("Group with id $voicechatId and name ${persistentGroup.name} not found")
+            return
+        }
+        val removed = BlocktowerVoicechatPlugin.SERVER_API.removeGroup(voicechatId)
+        if (removed) {
+            EnhancedGroups.PERSISTENT_GROUP_STORE.removeGroup(persistentGroup)
+            Blocktower.LOGGER.info("Removed group with id $voicechatId and name ${persistentGroup.name}")
+        } else {
+            Blocktower.LOGGER.error("Failed to remove group with id $voicechatId and name ${persistentGroup.name}")
+        }
     }
 }
